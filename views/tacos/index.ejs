@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1> <%= title %> </h1>
-
+<html>
+  <head>
+    <title>Taco Tracker</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Taco Tracker 2</h1>
     <form action="/tacos" method="POST">
-        <input type="text" name="name" placeholder="Taco Name">
-        <input type="checkbox" name="tasty">
-        <br><br>
-        <button type="submit">Add Taco</button>
+      <input type="text" name="name" placeholder="Taco Name">
+      <input type="checkbox" name="tasty"><br><br>
+      <button type="submit">Add Taco</button>
     </form>
-
-    <% tacos.forEach( taco => { %>
-
-
-
-    <% }) %>
-</body>
+    <% if (!tacos.length) { %>
+      <h3>There are no tacos!</h3>
+    <% } %> 
+    <% tacos.forEach((taco) => { %>
+      <form action="/tacos/<%= taco._id %>?_method=DELETE" method="POST">
+        <button type="submit">X</button>
+      </form>
+      <div>Name: <a href="/tacos/<%= taco._id %>"><%= taco.name %></a></div>
+      <div><%= taco.tasty ? 'is so tasty' : 'is not tasty' %> </div>
+    <% }) %> 
+  </body>
 </html>

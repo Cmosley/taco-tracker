@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-const tacoController = require('../controllers/tacos')
+const tacosCtrl = require('../controllers/tacos')
 
 /* GET users listing. */
-router.get('/', tacoController.index);
-router.post('/', tacoController.new );
+router.get('/', tacosCtrl.index);
+router.post('/', tacosCtrl.create)
+router.delete('/:id', tacosCtrl.delete)
+router.get('/:id', tacosCtrl.show)
+router.put('/:id', tacosCtrl.update)
 
 module.exports = router;
